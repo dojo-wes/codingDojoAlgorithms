@@ -22,7 +22,7 @@ function gotGrapes(arr, idx=0, currTotal=0, result=0) {
 		gotGrapes(arr, idx + 2, currTotal += arr[idx + 2]);
 		// gotGrapes(arr, idx + 3, currTotal += arr[idx + 3]);
 	}
-	console.log(result);
+	console.log("result", result);
 	return result;
 };
 
@@ -33,4 +33,4 @@ var array3 = [4, 5, 8, 10, 1]; // 15
 var array4 = [1, 2, 2, 1, 1, 1, 1, 100]; // 104
 var array5 = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // 25
 
-console.log(gotGrapes(array5));
+console.log("function call", gotGrapes(array5));
