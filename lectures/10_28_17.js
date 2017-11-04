@@ -7,21 +7,12 @@
 //got any grapes
 //Martin loves grapes. He sees a number of baggies containing grapes, all in a row. Stephen tells him that he can take as many of the baggies as he wants, as long as he doesn't take two that are next to each other. Martin wants to maximize his number of grapes. Grapes are pretty healthy, so let's help him out. Create a function to accept an array of non-negative integers representing number of grapes in each adjacent baggy. Your function should return the maximum amount of grapes he can obtain.
 
-function gotGrapes(arr, idx=0, currTotal=0, result=[]) {
-	if(idx == 0) {
-		currTotal = arr[0];
-	}
+function gotGrapes(arr, idx=-2, currTotal=0, result=[]) {
 	if(idx <= arr.length - 1 && idx + 2 !== undefined && idx + 3 !== undefined) {
 		result.push(currTotal);
 		gotGrapes(arr, idx + 2, currTotal + arr[idx + 2], result);
 		gotGrapes(arr, idx + 3, currTotal + arr[idx + 3], result);
-		// currTotal = arr[1];
-		// idx = 1;
-		// result.push(currTotal);
-		// gotGrapes(arr, idx + 2, currTotal + arr[idx + 2], result);
-		// gotGrapes(arr, idx + 3, currTotal + arr[idx + 3], result);
 	}
-	console.log(result);
 	return getMax(result);
 };
 
