@@ -11,24 +11,26 @@ function anagram(str) {
 		}
 		for(var i = 0; i < len; i++) {
 			recurse(letters, len - 1);
-			var temp = letters[i];
-			letters[i] = letters[len - 1];
+			var j = len % 2 ? i : 0;
+			// var j = i;
+			var temp = letters[j];
+			letters[j] = letters[len - 1];
 			letters[len - 1] = temp;
 		}
 	}
 	recurse(letters);
 	return results;
 }
-var str = "abcd";
-anagramTester(str);
+var str = "abc";
+anagramTester(str, {printResult: true});
 
-function anagramTester(str) {
+function anagramTester(str, options={}) {
 	const output = anagram(str);
 	// console.log(output);
 	var tests = {
 		result: output,
-		correctLength: output.length === factorial(str.length),
-		unique: function(arr) {
+		isCorrectLength: output.length === factorial(str.length),
+		isUnique: function(arr) {
 			for(var i = 0; i < arr.length; i++) {
 				for(var j = i + 1; j < arr.length; j++) {
 					if(arr[j] === arr[i]) {
@@ -39,8 +41,45 @@ function anagramTester(str) {
 			}
 		}(output)
 	}
-	console.log(tests);
+	function logger(options) {
+		var numErrors = 0;
+		var messages = [];
+		for(var key in tests) {
+			if(!tests[key]) {
+				numErrors++;
+				messages.push(`test with key: "${key}" failed with result: ${tests[key]}`);
+			}
+		}
+		if(!options.condensed) {
+			if(!numErrors) {
+				console.log("All tests passed!");
+			} else {
+				console.log(`${numErrors} tests failed...`);
+				for(var message of messages) {
+					console.log(message);
+				}
+			}
+			if(options.printAll) {
+				for(var key in tests) {
+					console.log(`${key} --> ${tests[key]}`);
+				}
+			} 
+			if(options.printResult) {
+				console.log(tests.result);
+			}
+		} else {
+			if(!numErrors){
+				console.log("All tests passed!");
+			}else if(numErrors < Object.keys(tests).length) {
+				console.log("Tests passed with some errors");
+			} else {
+				console.log("All tests failed");
+			}
+		}
+	};
+	logger(options);
 }
+
 
 function factorial(num) {
 	for (var i = num - 1; i > 0; i--) {
