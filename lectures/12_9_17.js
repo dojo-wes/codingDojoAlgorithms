@@ -15,7 +15,7 @@ function countPositive(array) {
 
 	return array;
 }
-console.log(countPositive(arr1));
+// console.log(countPositive(arr1));
 
 // given array of strings return array with string lengths as values.
 // You are passed an array containing strings. Working within that same array, replace each string with a number - the length of the string at the previous array index - and return the array;
@@ -28,7 +28,7 @@ function stringLength(array) {
 	return array;
 }
 
-console.log(stringLength(arr1));
+// console.log(stringLength(arr1));
 
 
 // Swap toward the center
@@ -44,5 +44,24 @@ function swapTowardCenter(arr) {
 	return arr;
 }
 
-console.log(swapTowardCenter([1, 2, 3, 4, 5, 6]));
-console.log(swapTowardCenter([1, 2, 3, 4, 5, 6, 7]));
+// console.log(swapTowardCenter([1, 2, 3, 4, 5, 6]));
+// console.log(swapTowardCenter([1, 2, 3, 4, 5, 6, 7]));
+
+function reversearr(arr){
+    for (var i = 0; i < arr.length / 2; i++){
+		// if(i > arr.length / 2) {
+		// 	break;
+		// }
+		var temp = arr[i];
+		arr[i] = arr[arr.length - 1 - i];
+		arr[arr.length - 1 - i] = temp;
+		// console.log(i, arr.length - 1 - i, arr, i + 1 + " times");
+	}
+
+	return arr;
+}
+var arr =[1,2,3,4]; // [4, 3, 2, 1]
+var arr2 = [1,2,3,4,5,6,7]; // [5,4,3,2,1]
+
+console.log(reversearr(arr));
+console.log(reversearr(arr2));
