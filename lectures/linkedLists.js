@@ -49,8 +49,38 @@ class SList {
 		this.head = n;
 		return this;
 	}
+	
+	removeFront() {
+		var temp = this.head;
+		this.head = this.head.next;
+		temp.next = null;
+		return this;
+	}
 }
 
 var list = new SList();
-list.addFront("C").addFront('B').addFront('A');
+list.addFront("C").addFront('B').addFront('A').removeFront().removeFront();
 console.log(list);
+var otherList = new SList();
+// otherList.addFront('Z').addFront('Y').addFront('X');
+
+class Human {
+	constructor(g, a, n, value) {
+		this.gender = g;
+		this.age = a;
+		this.name = n;
+	}
+}
+
+// var wes = new Human('male', 23, 'Wes');
+// var greg = new Human('male', 28, 'Greg');
+// console.log(wes, greg);
+// wes.name = "Greg";
+// console.log(wes);
+
+// list = {
+// 	head: {
+// 		val: 'thing',
+// 		next: Node
+// 	}
+// }
