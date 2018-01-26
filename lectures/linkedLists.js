@@ -39,29 +39,101 @@ var test = new Node();
 class SList {
 	constructor() {
 		this.head = null;
+		this.length = 0;
 	}
 
 	addFront(value) {
 		var n = new Node(value);
-		if(this.head) {
+		if (this.head) {
 			n.next = this.head;
 		}
 		this.head = n;
+		this.length++;
 		return this;
 	}
-	
+
 	removeFront() {
 		var temp = this.head;
 		this.head = this.head.next;
 		temp.next = null;
+		this.length--;
+		return this;
+	}
+
+	firstValue() {
+		if (!this.head) {
+			return null;
+		}
+		var curr = this.head;
+		// look through list
+		while (curr.next != null) {
+			curr = curr.next;
+		}
+		return curr.val;
+	}
+
+	front() {
+		return this.head.val;
+	}
+
+	//function to check if given value is in list
+	contains(searchVal) {
+		if (this.head == null) {
+			return null;
+		}
+		//fast exit check
+		var curr = this.head;
+		while (curr != null) {
+			//console.log('curr val:', curr.val, 'search val:', searchVal);
+			if (curr.val == searchVal) {
+				return true;
+			} else {
+				curr = curr.next;
+			}
+		}
+		return false;
+	}
+
+	getLength() {
+		if (!this.head) {
+			return 0;
+		}
+		
+		var count = 1;
+		var curr = this.head;
+		while(curr.next) {
+			count++;
+			curr = curr.next;
+		}
+		console.log(count);
+		return this;
+	}
+
+	display() {
+		var result = [];
+		var curr = this.head;
+		while(curr){
+			result.push(curr.val);
+			curr = curr.next;
+		}
+		console.log(result);
 		return this;
 	}
 }
 
 var list = new SList();
-list.addFront("C").addFront('B').addFront('A').removeFront().removeFront();
-console.log(list);
-var otherList = new SList();
+list.addFront("C")
+	.display()
+	.addFront({
+		something: 'string', 
+		otherThing: 22, 
+		anotherThing: [2,3,4]
+	})
+	.display()
+	.addFront('A')
+	.display();
+
+
 // otherList.addFront('Z').addFront('Y').addFront('X');
 
 class Human {
