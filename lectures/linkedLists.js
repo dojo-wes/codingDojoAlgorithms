@@ -119,22 +119,64 @@ class SList {
 		console.log(result);
 		return this;
 	}
+
+	addBack(data) {
+		var n = new Node(data);
+
+		if(!this.head) {
+			this.head = n;
+			return this;
+		}
+		var curr = this.head;
+		while(curr.next) {
+			curr = curr.next;
+		}
+		curr.next = n;
+
+		return this;
+	}
+
+	minToFront() {
+		// check all to find smallest value
+		// move to front
+			// keep track of beforeMin and min
+		if(!this.head) {
+			return null;
+		}
+		if(this.head.next == null) {
+			// see comment below
+			return this;
+		}
+
+		var min = this.head;
+		var beforeMin = this.head;
+		var curr = this.head;
+		while(curr.next) {
+			if(curr.next.val < min.val) {
+				beforeMin = curr;
+				min = curr.next;
+			}
+			curr = curr.next;
+		}
+
+		beforeMin.next = min.next;
+		min.next = this.head;
+		this.head = min;
+		// going to return this, but only because we've built display;
+		return this;
+	}
 }
 
 var list = new SList();
 list.addFront("C")
-	.display()
-	.addFront({
-		something: 'string', 
-		otherThing: 22, 
-		anotherThing: [2,3,4]
-	})
-	.display()
+	.addFront('B')
 	.addFront('A')
-	.display();
+	.display()
+	.addBack('D')
+	.display()
 
-
-// otherList.addFront('Z').addFront('Y').addFront('X');
+var otherList = new SList();
+otherList.addBack(4).addBack(2).addBack(1).addBack(3).display().minToFront().display();
 
 class Human {
 	constructor(g, a, n, value) {
