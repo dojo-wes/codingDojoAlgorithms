@@ -98,10 +98,10 @@ class SList {
 		if (!this.head) {
 			return 0;
 		}
-		
+
 		var count = 1;
 		var curr = this.head;
-		while(curr.next) {
+		while (curr.next) {
 			count++;
 			curr = curr.next;
 		}
@@ -112,7 +112,7 @@ class SList {
 	display() {
 		var result = [];
 		var curr = this.head;
-		while(curr){
+		while (curr) {
 			result.push(curr.val);
 			curr = curr.next;
 		}
@@ -123,12 +123,12 @@ class SList {
 	addBack(data) {
 		var n = new Node(data);
 
-		if(!this.head) {
+		if (!this.head) {
 			this.head = n;
 			return this;
 		}
 		var curr = this.head;
-		while(curr.next) {
+		while (curr.next) {
 			curr = curr.next;
 		}
 		curr.next = n;
@@ -139,11 +139,11 @@ class SList {
 	minToFront() {
 		// check all to find smallest value
 		// move to front
-			// keep track of beforeMin and min
-		if(!this.head) {
+		// keep track of beforeMin and min
+		if (!this.head) {
 			return null;
 		}
-		if(this.head.next == null) {
+		if (this.head.next == null) {
 			// see comment below
 			return this;
 		}
@@ -151,8 +151,8 @@ class SList {
 		var min = this.head;
 		var beforeMin = this.head;
 		var curr = this.head;
-		while(curr.next) {
-			if(curr.next.val < min.val) {
+		while (curr.next) {
+			if (curr.next.val < min.val) {
 				beforeMin = curr;
 				min = curr.next;
 			}
@@ -165,24 +165,74 @@ class SList {
 		// going to return this, but only because we've built display;
 		return this;
 	}
+
+	maxToBack() {
+		if (!this.head) {
+			return null;
+		}
+		if (this.head.next == null) {
+			return this;
+		}
+		var max = this.head;
+		var beforeMax = this.head;
+		var curr = this.head;
+		while (curr.next) {
+			if (curr.next.val > max.val) {
+				beforeMax = curr;
+				max = curr.next;
+			}
+			curr = curr.next;
+		}
+		curr.next = max;
+		beforeMax.next = max.next;
+		max.next = null;
+		return this;
+	}
+
+	appendVal(val, after) {
+		var n = new Node(val);
+		if(!this.head) {
+			this.head = n;
+		}
+		var curr = this.head;
+		while(curr.next) {
+			if(after == curr.val) {
+				n.next = curr.next;
+				curr.next = n;
+				return this;
+			}
+			curr = curr.next;
+		}
+		curr.next = n;
+		return this;
+	}
 }
 
 var list = new SList();
-list.addFront("C")
-	.addFront('B')
-	.addFront('A')
+list
+	.addBack("A")
+	.appendVal("A2", "A")
 	.display()
-	.addBack('D')
+	.addBack("B")
+	.addBack("C")
+	.addBack("D")
 	.display()
+	.display();
 
 var otherList = new SList();
-otherList.addBack(4).addBack(2).addBack(1).addBack(3).display().minToFront().display();
+otherList.addBack(4).addBack(2).addBack(1).addBack(3).display().minToFront().display().maxToBack().display();
 
 class Human {
 	constructor(g, a, n, value) {
 		this.gender = g;
 		this.age = a;
 		this.name = n;
+	}
+}
+
+var library = {
+	myFunc: function() {
+		console.log('world');
 	}
 }
 
