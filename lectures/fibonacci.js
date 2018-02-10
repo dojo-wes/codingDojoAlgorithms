@@ -37,8 +37,8 @@ function iterFib2(num) {
 console.log(iterFib2(8));
 
 function recurFib(num, a=0, b=1) {
-	if(num <= 1) {
-		return num;
+	if(num === 0) {
+		return a;
 	}
 	return recurFib(num - 1, b, a+b);
 }
