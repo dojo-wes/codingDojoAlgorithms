@@ -9,13 +9,12 @@
 // function rFib(num, x=0, y=1, sum=0) {
 //  // x, y, sum
 //  if(sum <= num) {
-
+	
 //  }
 //  num = y;
 //  y = sum;
 //  rFib(num, x, y, sum)
 // }
-
 // twelve-bar blues
 // Write a function that console.logs the number 1, then "chick", then "boom", then "chick", then 2, then "chick", "boom", "chick" - continuing the same sycle for each number up to 12
 
@@ -65,8 +64,6 @@ console.log(fibonacci(1012));
 
 console.log("beginning recursive:", Math.floor(Date.now()));
 function recurFib(n, a = 0, b = 1) {
-	// a = a || 0;
-	// b = b || 1;
 	if(!n) {
 		console.log("ending recursive", Math.floor(Date.now()));
 		return a;
