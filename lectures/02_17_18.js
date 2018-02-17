@@ -74,3 +74,6 @@ function drawLeftStars(num) {
 
 console.log(drawLeftStars(5).length);
 // console.log('hello'.length);
+var string = 'hello';
+string = ' ' + string;
+console.log(string);
