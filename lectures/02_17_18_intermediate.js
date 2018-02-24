@@ -54,6 +54,7 @@ var teststr = "(JKJK(a)(b(isd)) iippo(23)io)";
 // }
 
 function bracesValid(str) {
+	console.log('start:', new Date().getMilliseconds());
 	// how do we define whether the inner braces have been closed first?
 	// we can't close a type if the last open was of a different type
 	var braces = {
@@ -72,13 +73,14 @@ function bracesValid(str) {
 		}
 	}
 	console.log(str, '!opens.length', !opens.length);
+	console.log('end:', new Date().getMilliseconds());
 	return !opens.length ? true : false;
 }
 
 var test = "W(a{t}s[o(n{ c}o)m]e )h[e{r}e]!";
 var test2 = "A(1)s[O (n]0{t) 0}k";
 var test3 = "D(i{a}l[ t]o)n{e";
-// console.log(bracesValid(test)); // true
+console.log(bracesValid(test)); // true
 // console.log(bracesValid(test2)); // false
 // console.log(bracesValid(test3)); // false
 
