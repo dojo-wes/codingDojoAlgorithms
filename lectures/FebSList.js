@@ -17,11 +17,13 @@ class Node {
 class SList {
 	constructor() {
 		this.head = null;
+		this.length = 0;
 	}
 	addFront(data) {
 		var n = new Node(data);
 		n.next = this.head;
 		this.head = n;
+		this.length++;
 		return this;
 	}
 	removeFront() {
@@ -30,6 +32,7 @@ class SList {
 			this.head = this.head.next;
 			temp.next = null;
 		}
+		this.length--;
 		return this;
 	}
 	contains(data) {
@@ -42,13 +45,70 @@ class SList {
 		}
 		return false;
 	}
+	length() {
+		var count = 0;
+		var curr = this.head;
+		while(curr) {
+			count++;
+			curr = curr.next;
+		}
+		console.log(count);
+		return this;
+	}
+	display() {
+		var result = [];
+		var curr = this.head;
+		while(curr) {
+			result.push(curr.val);
+			curr = curr.next;
+		}
+		console.log(result);
+		return this;
+	}
+	addBack(data) {
+		var n = new Node(data);
+		if(!this.head) {
+			this.head = n;
+			return this;
+		} 
+		var curr = this.head;
+		while(curr.next) {
+			curr = curr.next;
+		}
+		curr.next = n;
+		return this;
+	}
+	maxToBack() {
+		if(!this.head) {
+			return this.display();
+		}
+		var max = this.head;
+		var afterMax = this.head.next;
+		var beforeMax, tail = null;
+		var curr = this.head;
+		while(curr.next) {
+			if(curr.next.val > max.val) {
+				max = curr.next;
+				beforeMax = curr;
+				afterMax = max.next;
+			}
+			curr = curr.next;
+		}
+		tail = curr;
+		beforeMax.next = afterMax;
+		tail.next = max;
+		max.next = null;
+		return this.display();
+	}
 }
 
 var list = new SList();
-list.addFront('C').addFront('B').addFront('A');
-console.log(list.contains('C'));
-var empty = new SList();
-console.log(empty.contains('A'));
+// list.display().addFront('C').display().addFront('B').display().addFront('A').display().addBack('D').display();
+var numList = new SList();
+numList.addBack(2).addBack(3).addBack(5).addBack(2).addBack(1).maxToBack();
+// console.log(list.contains('C'));
+// var empty = new SList();
+// console.log(empty.contains('A'));
 // class Person {
 // 	constructor(first, last) {
 // 		this.first = first;
