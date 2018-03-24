@@ -39,8 +39,6 @@ describe('SList', () => {
         testList.reverse()
       ).toBe(null);
     });
-
-    // hi
   });
 });
 
