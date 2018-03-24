@@ -4,7 +4,7 @@
   "description": "Coding Dojo algorithm lectures and challenges",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "jest --watchAll"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/wesharper/codingDojoAlgorithms#readme",
   "devDependencies": {
-    "jasmine": "^3.1.0"
+    "jasmine": "^3.1.0",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3"
   }
 }

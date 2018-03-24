@@ -1,0 +1,6 @@
+{
+  "name": "Coding Dojo Algorithms",
+  "jest": {
+    "verbose": true
+  }
+}
