@@ -1,4 +1,4 @@
-var SList = require('../../lectures/03-24-18-advanced');
+var SList = require('../../legacy/03-24-18-advanced');
 
 describe('SList', () => {
   describe('reverse', () => {
