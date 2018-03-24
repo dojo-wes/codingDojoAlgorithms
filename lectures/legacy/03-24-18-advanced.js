@@ -35,7 +35,7 @@ Array.prototype.equals = function (arr) {
   return true;
 };
 
-testReverse();
+// testReverse();
 
 function testReverse() {
   let testList = new SList();
