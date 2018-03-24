@@ -100,12 +100,31 @@ class SList {
 		max.next = null;
 		return this.display();
 	}
+
+	toArr() {
+		let curr = this.head;
+		let result = [];
+		while(curr) {
+			result.push(curr.val);
+			curr = curr.next;
+		}
+		return result;
+	}
+
+	addMultiple(arr) {
+		for(let val of arr) {
+			this.addBack(val);
+		}
+		return this;
+	}
 }
 
-var list = new SList();
+module.exports = SList;
+
+// var list = new SList();
 // list.display().addFront('C').display().addFront('B').display().addFront('A').display().addBack('D').display();
-var numList = new SList();
-numList.addBack(2).addBack(3).addBack(5).addBack(2).addBack(1).maxToBack();
+// var numList = new SList();
+// numList.addBack(2).addBack(3).addBack(5).addBack(2).addBack(1).maxToBack();
 // console.log(list.contains('C'));
 // var empty = new SList();
 // console.log(empty.contains('A'));
