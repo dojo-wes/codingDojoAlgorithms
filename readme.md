@@ -10,5 +10,5 @@
 * Add your own unit tests (Jest/Jasmine) in the chapter specific spec/ folder, or use the prebuilt unit tests.
   * Make sure they have the .spec.js extension.
 * Export your function using ```module.exports = functionName;``` at the end of your function's file.
-* Use ```const require('../student/firstname-lastname');``` at the top of your unit test file to import your function.
+* Use ```const functionName = require('../student/firstname-lastname');``` at the top of your unit test file to import your function.
 * Use ```npm test``` to run unit tests.
