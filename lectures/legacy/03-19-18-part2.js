@@ -92,4 +92,6 @@ function testRainTerrace(func) {
   }
 }
 
-testRainTerrace(rainTerraces);
+// testRainTerrace(rainTerraces);
+
+module.exports = rainTerraces;
