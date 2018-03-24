@@ -40,5 +40,12 @@ describe('SList', () => {
       ).toBe(null);
     });
   });
+  describe('isPalindrome', () => {
+    it('should work', () => {
+      expect(
+        true
+      ).toBe(true);
+    });
+  });
 });
 
