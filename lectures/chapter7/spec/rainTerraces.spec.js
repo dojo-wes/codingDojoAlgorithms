@@ -1,4 +1,4 @@
-var rainTerraces = require('../../legacy/03-19-18-part2');
+var rainTerraces = require('../student/isabel-chacon');
 
 describe('rainTerraces()', () => {
   it('should be correct when there are no outer buckets', () => {
@@ -48,5 +48,12 @@ describe('rainTerraces()', () => {
     expect(
       rainTerraces(given)
     ).toBe(5);
+  });
+
+  it('should be correct when there are multiple buckets on the tail that have heights shorter than the max', () => {
+    const given = [8, 4, 3, 10, 2, 7, 3, 2, 6];
+    expect(
+      rainTerraces(given)
+    ).toBe(21)
   });
 });
