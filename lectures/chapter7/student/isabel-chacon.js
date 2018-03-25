@@ -36,6 +36,7 @@ function rainTerraces(arr) {
         end = false;
         //console.log(localSum);
       }
+
       //How to determine end of bucket when it never reaches equal height
       else {//Reached end of current bucket
         bucketLength = 0;
@@ -48,9 +49,24 @@ function rainTerraces(arr) {
     }
     else {//Reached end of array
       if (!end) { //Last bucket was never closed
-        if (arr[i] < startHeight) {
+        if (i > maxIndex && arr[i] > arr[i - 1]) {
+          //maxHeight is not at end of array
+          var lenlocal = maxIndex - startIndex;
+          var difference = (startHeight - maxHeight) * lenlocal;
+          localSum -= difference;
+
+          if (maxIndex - startIndex == 1 && i - maxIndex > 1) {
+            maxHeight = startHeight;
+            maxIndex++;
+          }
+
+          lenlocal = i - maxIndex;
+          difference = (maxHeight - arr[i]) * lenlocal;
+          localSum -= difference;
+        }
+        else if (arr[i] < startHeight) {
           var difference = (startHeight - maxHeight) * bucketLength;
-          localSum = localSum - difference;
+          localSum -= difference;
         }
         totalSum += localSum;
       }

@@ -50,10 +50,10 @@ describe('rainTerraces()', () => {
     ).toBe(5);
   });
 
-  it('should be correct when there are multiple buckets on the tail that have heights shorter than the max', () => {
-    const given = [8, 4, 3, 10, 2, 7, 3, 2, 6];
+  it('should be correct when there are multiple buckets on the tail', () => {
+    const given = [4, 1, 3, 1, 2, 1, 2, 1];
     expect(
       rainTerraces(given)
-    ).toBe(21)
+    ).toBe(4)
   });
 });
