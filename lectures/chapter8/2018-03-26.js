@@ -22,10 +22,12 @@ SList.prototype.reverse = function () {
 }
 
 SList.prototype.isPalindrome = function () {
+  // fast fail for empty list
   if (!this.head){
     return null;
   }
 
+  // fast pass for single value
   if (!this.head.next){
     return true;
   }
@@ -35,23 +37,26 @@ SList.prototype.isPalindrome = function () {
   let midIndex = Math.ceil(this.length / 2);
   let midNode;
 
+  //set mid node
   for(let count = 1; count < midIndex; count++){
     curr2 = curr2.next;
   }
   midNode = curr2;
 
-  for(let index = midIndex; index > 0; index--) {
-    for(let offset = index; offset > 0; offset--){
+  let index = this.length % 2 !== 0 ? 1 : 0; // ternary for odd or even length
+  while(index < midIndex) {
+    for(let offset = 0; offset < midIndex - index; offset++){
       curr2 = curr2.next;
     }
     if (curr1.val === curr2.val){
       curr2 = midNode;
       curr1 = curr1.next;
+      index++;
     } else {
       return false;
     }
   }
-  return true
+  return true;
 }
 
 // use for debugging
