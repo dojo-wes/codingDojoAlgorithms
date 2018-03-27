@@ -69,6 +69,7 @@ class SList {
 		var n = new Node(data);
 		if(!this.head) {
 			this.head = n;
+			this.length++;
 			return this;
 		} 
 		var curr = this.head;
@@ -76,6 +77,7 @@ class SList {
 			curr = curr.next;
 		}
 		curr.next = n;
+		this.length++;
 		return this;
 	}
 	maxToBack() {
