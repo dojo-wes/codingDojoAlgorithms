@@ -76,6 +76,7 @@ class SList {
 			curr = curr.next;
 		}
 		curr.next = n;
+		this.length++; 
 		return this;
 	}
 	maxToBack() {
