@@ -1,4 +1,4 @@
-var SList = require('../2018-03-26');
+const SList = require('../2018-03-26');
 
 describe('SList', () => {
   let testList;

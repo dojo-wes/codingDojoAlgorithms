@@ -54,4 +54,11 @@ SList.prototype.isPalindrome = function () {
   return true
 }
 
+// use for debugging
+const test = new SList();
+test.addMultiple(['l', 'e', 'v']);
+// put a breakpoint on the function call to step into.
+// additional breakpoints may be helpful
+test.isPalindrome();
+
 module.exports = SList;
