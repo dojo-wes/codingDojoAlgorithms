@@ -1,4 +1,4 @@
-var rainTerraces = require('../student/isabel-chacon');
+var rainTerraces = require('../student/greg-recursiveRainTerraces');
 
 describe('rainTerraces()', () => {
   it('should be correct when there are no outer buckets', () => {
