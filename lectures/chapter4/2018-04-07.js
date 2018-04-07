@@ -51,7 +51,6 @@ String.prototype.concatenate = function (...strings) {
   for(let str of strings) {
     newStr += str;
   }
-  this.string = new String(newStr)
   return newStr;
 }
 
