@@ -32,7 +32,6 @@ function censor(str, badWords) {
 }
 
 // Create a function that returns all permutations of a given string.Example: given "team", return an array with the unique 24 strings including "team", "meat", "tame", "mate", "aemt", "tmea", "etam", "atme", etc.How can you know that you covered them all ?
-const rotate = require('./2018-04-09').stringRotate;
 function allButIndex(str, idx) {
   let result = '';
   for(let i = 0; i < str.length; i++) {
