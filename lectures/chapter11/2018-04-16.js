@@ -89,9 +89,9 @@ class BST {
   }
 
   height(node = this.root) {
-    if(!(node instanceof BSTNode)) {
-      return null;
-    }
+    // if(!(node instanceof BSTNode)) {
+    //   return null;
+    // }
     if(!node) {
       return 0;
     }
@@ -101,6 +101,11 @@ class BST {
   }
 }
 
-let tree = new BST();
-tree.add(10).add(15).add(5).add(20).add(17);
-console.log(tree.height());
+// let tree = new BST();
+// tree.add(10).add(15).add(5).add(20).add(17);
+// console.log(tree.height());
+
+module.exports = {
+  BST,
+  BSTNode
+}
