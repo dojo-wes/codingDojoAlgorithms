@@ -60,15 +60,17 @@ BST.prototype.isBalanced = function(node = this.root) {
 }
 
 let tree = new BST();
-// const nodes = [20, 15, 25, 10, 30, 5, 35, 17];
 const nodes = [5, 10, 15, 17, 20, 25, 25, 30];
 tree.arrayToBST(nodes);
-console.log(tree.isBalanced());
-console.log(tree.size);
+// console.log(tree.isBalanced());
+// console.log(tree.size);
 
-for(let node of nodes) {
-  console.log(tree.contains(node));
-}
+// for(let node of nodes) {
+//   console.log(tree.contains(node));
+// }
 
-let nicksTree = coolArrToBST(nodes);
+// let nicksTree = coolArrToBST(nodes);
 // console.log(nicksTree);
+module.exports = {
+  BST
+}
