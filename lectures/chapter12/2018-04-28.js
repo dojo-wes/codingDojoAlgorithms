@@ -62,10 +62,10 @@ function insertionSort(arr) {
     arr[ins + 1] = curr;
   }
   return arr;
-}
+};
 
 module.exports = {
   bubbleSort,
   selectionSort,
   insertionSort,
-}
+};

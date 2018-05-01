@@ -1,4 +1,4 @@
-const bracesValid = require('../2018-04-07').bracesValid;
+const bracesValid = require('../2018-04-28').braces_valid;
 
 describe('bracesValid()', () => {
   it('should return true when braces are valid', () => {
