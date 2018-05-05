@@ -5,13 +5,13 @@ function partition(arr, start=0, end=arr.length) {
   // how can we test for this before we get there?
   let first = arr[start];
   let last = arr[end - 1];
-  let mid = arr[Math.floor((end - start) / 2)];
+  let mid = arr[Math.floor((end - start) / 2) + start];
   if ((last > first && last < mid) || (last < first && last > mid)) {
     arr[start] = last;
     arr[end - start - 1] = first;
   } else if ((mid > first && mid < last) || (mid < first && mid >= last)) {
     arr[start] = mid;
-    arr[Math.floor((end - start) / 2)] = first;
+    arr[Math.floor((end - start) / 2) + start] = first;
   }
 
   for(let i = start + 1; i < end; i++) {
@@ -24,8 +24,17 @@ function partition(arr, start=0, end=arr.length) {
       pivot++;
     }
   }
-  console.log(arr);
+  // console.log(arr);
+  // console.log(pivot);
   return pivot;
 }
 
-console.log(partition([5, 4, 9, 2, 5, 3]));
+var arr = [5, 1, 8, 4, 9, 2, 5, 3];
+// partition(arr)
+// partition(arr, 0, 4);
+// partition(arr, 5, arr.length);
+
+
+module.exports = {
+  partition
+}

@@ -64,6 +64,20 @@ function insertionSort(arr) {
   return arr;
 };
 
+function makeTestArr() {
+  let arr = [];
+  for (let i = 0; i < 1000000; i++) {
+    arr.push((Math.trunc(Math.random() * 1000000)));
+  }
+  console.log(arr);
+  return arr;
+}
+
+const myArr = makeTestArr();
+let start = Date.now();
+selectionSort(myArr);
+console.log(Date.now() - start);
+
 module.exports = {
   bubbleSort,
   selectionSort,
