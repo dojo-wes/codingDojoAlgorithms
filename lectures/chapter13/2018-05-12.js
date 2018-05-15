@@ -95,7 +95,7 @@ class MinHeap {
         let temp = arr[swapIdx];
         arr[swapIdx] = arr[idx];
         arr[idx] = temp;
-        return build(arr, swapIdx);
+        build(arr, swapIdx);
       }
       return arr[idx];
     }
@@ -103,7 +103,20 @@ class MinHeap {
     build(arr);
     this.heap = arr;
   }
+
+  isValid() {
+    for(let i = 1; i < this.heap.length; i++) {
+      if(this.heap[i * 2] !== undefined && this.heap[i * 2 + 1] !== undefined) {
+        if(this.heap[i * 2] < this.heap[i] || this.heap[i * 2 + 1] < this.heap[i]) {
+          console.log(this.heap[i], this.heap[i * 2], this.heap[i * 2 + 1], i);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }
 
-let mh = new MinHeap([100, 200, 12, 123, 45, 25, 2354]);
-console.log(mh);
+module.exports = {
+  MinHeap
+}
