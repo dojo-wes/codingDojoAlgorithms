@@ -53,10 +53,14 @@ BST.prototype.bst2Arr = function() {
   return arr;
 }
 
-let tree = new BST();
-const nodes = [5, 10, 15, 12, 17, 19, 23, 23, 23];
-tree.arrayToBST(nodes);
+// let tree = new BST();
+// const nodes = [5, 10, 15, 12, 17, 19, 23, 23, 23];
+// tree.arrayToBST(nodes);
 // console.log("root:", tree.root.val);
 // tree.traversePost();
-console.log(tree.bst2Arr());
+// console.log(tree.bst2Arr());
 // console.log(tree.closestAncestor(10, 19));
+
+module.exports = {
+  BST
+}
