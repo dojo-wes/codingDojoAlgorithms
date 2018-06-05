@@ -130,4 +130,4 @@ hm.add("pizza", "good").add("sushi", "great").add("stale crackers", "bad").add("
 // console.log(hm);
 // console.log(hm.remove('pizza'));
 console.log(hm.findKey("sushi"));
-console.log(hm.setSize(200));
+console.log(hm.setSize(5));

@@ -43,6 +43,10 @@ BST.prototype.isComplete = function() {
   return recurse(this.root, 0);
 }
 
-let bst = new BST();
-bst.add(10).add(5).add(15).add(2).add(7).add(17);
-console.log(bst.isComplete());
+// let bst = new BST();
+// bst.add(10).add(5).add(15).add(2).add(7).add(17);
+// console.log(bst.isComplete());
+
+module.exports = {
+  BST
+}
