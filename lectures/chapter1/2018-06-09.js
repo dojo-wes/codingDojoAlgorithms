@@ -58,4 +58,4 @@ function valuesGTS(arr) {
   return newArr;
 }
 
-console.log(valuesGTS([10, 2, 3, 1, 1, 2, 4, 5])``);
+console.log(valuesGTS([10, 2, 3, 1, 1, 2, 4, 5]));
