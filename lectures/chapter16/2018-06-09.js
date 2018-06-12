@@ -29,12 +29,22 @@ class TrieSet {
         }
       }
       const n = new TrieNode(str[idx]);
+      console.log('new node', n);
       if(node.pointers.length > 0) {
         let i = 0;
-        while(node.pointers[i].letter < n.letter) {
+        console.log('pointers', node.pointers);
+        // this puts the trie in alphabetical order
+        while(node.pointers[i] && node.pointers[i].letter < n.letter) {
           i++;
         }
-        node.pointers.splice(i-1, 0, n);
+        // this is to catch for the case where the letter being added should be the first index in the pointers array
+        if(i !== 0) {
+          i = i - 1;
+        }
+        node.pointers.splice(i, 0, n);
+        for(let i = 0; i < node.pointers.length; i++) {
+          console.log(`pointer[${i}] == ${node.pointers[i].letter}`);
+        } 
       } else {
         node.pointers.push(n);
       }
@@ -62,10 +72,45 @@ class TrieSet {
     }
     return curr.val === str;
   }
+  // check string for each letter 
+  // once we get to end of string give all possinilites at each pointer path else null
+  autoComplete(str) {
+    str = str.toLowerCase();
+    const results = [];
+    let curr = this.root;
+    for (let i = 0; i < str.length; i++) {
+      let foundLetter = false;
+      for ( let j = 0; j < curr.pointers.length; j++) {
+        if (str[i] === curr.pointers[j].letter) {
+          curr = curr.pointers[j];
+          foundLetter = true;
+          break;
+        }
+      }
+      if (!foundLetter) {
+        return null;
+      }
+    }
+    function recurse(node) {
+      if(node.val !== null) {
+        results.push(node.val);
+      }
+      if (node.pointers.length === 0) {
+        return;
+      }
+      for (let pointer of node.pointers) {
+        recurse(pointer);
+      }
+    }
+    recurse(curr);
+    return results.length ? results : null;
+  }
 }
 
 let trie = new TrieSet();
 console.log(trie.insert('HI'));
 console.log(trie.insert('Hello'));
+console.log(trie.insert('Hell'));
+console.log(trie.insert('He'));
 console.log(trie.root.pointers[0].pointers);
-console.log(trie.contains('he'));
+console.log(trie.autoComplete('helloo'));
