@@ -121,6 +121,46 @@ class ELGraph {
     }
     return neighbors;
   }
+
+  // Given a generalized graph and two vertex IDs, return whether a path exists from first to second vertex.
+  // Second: on success, return array of vertex IDs representing one possible path.If none exist, return [].
+  isReachable(vertID1, vertID2, curr=null, path=[]) {
+    if(curr == vertID1) {
+      return [];
+    }
+    if(curr == vertID2) {
+      path.push(curr);
+      return path;
+    }
+    let result = [];
+    curr = curr || vertID1;
+    for(let edge of this.edgeList) {
+      if(edge[0] == curr) {
+        path.push(edge[0]);
+        result.push(this.isReachable(vertID1, vertID2, edge[1], path));
+      }
+    }
+    return result;
+  }
+  isReachable2(vertID1, vertID2) {
+    let result = [];
+    let that = this;
+    function recurse(vertID1, vertID2, visited={}, path=[]) {
+      visited[vertID1] = true;
+      path.push(vertID1);
+      if(vertID1 == vertID2) {
+        result = path;
+        return;
+      }
+      for(let edge of that.edgeList) {
+        if(edge[0] == vertID1 && !visited[edge[1]]) {
+          path.concat(recurse(edge[1], vertID2, visited, path));
+        }
+      }
+    }
+    recurse(vertID1, vertID2);
+    return result;
+  }
 }
 
 let el = new ELGraph();
@@ -135,7 +175,7 @@ el.addEdge('1', '8', 9);
 el.addEdge('2', '4', 5);
 el.addEdge('3', '4', 1);
 
-console.log(el.getVertexValue(3));
+console.log(el.isReachable2(1, 4));
 
 el.removeEdge(2);
-console.log(el);
+// console.log(el);
