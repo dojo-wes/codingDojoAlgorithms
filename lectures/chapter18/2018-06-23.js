@@ -26,22 +26,14 @@ function countInBinary(bits, substr='0b', results=[]) {
 
 function encodeBytesTo32(bytes) {
   let result = bytes[0];
-  console.log('current byte', bytes[0], result);
   for(let i = 1; i < bytes.length; i++) {
-    let shifter = 8;
-    console.log('current byte', bytes[i]);
-    if(i === 3) {
-      shifter = 7;
-    }
-    result = (result << shifter);
-    console.log('hex string of shifted result', result.toString(16));
+    result = (result << 8);
     result |= bytes[i];
-    console.log('merged result', result);
   }
-  return result;
+  return result >>> 0;
 }
-// console.log(encodeBytesTo32([0xF0, 0xC3, 0x96, 0x59]));
-// console.log(0xF0C39659);
+console.log(encodeBytesTo32([0xF0, 0xC3, 0x96, 0x59]));
+console.log(0xF0C39659);
 
 
 // On the previous |= << issue, this might help understand it

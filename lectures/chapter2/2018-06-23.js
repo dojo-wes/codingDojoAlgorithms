@@ -18,12 +18,24 @@ function isPrime(num) {
   // if the index reaches 1, then the number is prime.
   return true;
 }
+function isPrime(num) {
+  if(!(num%2)) {
+    return false;
+  }
+  for (var i = 3; i < Math.sqrt(num) + 1; i += 2) {
+    if (num % i == 0) {
+      return false;
+    }
+  }
+  // if the index reaches 1, then the number is prime.
+  return true;
+}
 
-// console.log(isPrime(2));
+console.log(isPrime(17));
 
 function extractDigit(num, digitNum) {
   return Math.trunc(num / Math.pow(10, digitNum)) % 10;
 }
 
-console.log(extractDigit(123, 0)); // 3
-console.log(extractDigit(123, 1)); // 2
+// console.log(extractDigit(123, 0)); // 3
+// console.log(extractDigit(123, 1)); // 2
