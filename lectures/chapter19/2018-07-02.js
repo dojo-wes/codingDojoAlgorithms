@@ -46,47 +46,90 @@ class AVLTree {
   }
 
   add(value) {
-    // this needs to be refactored
     const n = new AVLNode(value);
     if(!this.head) {
       this.head = n;
       return this;
     }
-    let curr = this.head;
-    while(curr) {
-      if(n.val >= curr.val) {
-        // balance does not necessarily decrease by one every time. It will either decrease by 1 or 0, depending on height of additional subtrees.
-        curr.balance -= 1;
-        if(curr.right) {
-          curr = curr.right;
+    const head = this.head;
+    function recurse(node = head) {
+      if(n.val >= node.val) {
+        if(node.right) {
+          recurse(node.right);
         } else {
-          curr.right = n;
-          return this;
+          node.right = n;
+          node.balance -= 1;
+          return;
         }
       } else {
-        // see above
-        curr.balance += 1;
-        if(curr.left) {
-          curr = curr.left;
+        if(node.left) {
+          recurse(node.left);
         } else {
-          curr.left = n;
-          return this;
+          node.left = n;
+          node.balance += 1;
+          return;
         }
       }
+      node.balance = node.left.height() - node.right.height();
+      return;
     }
+    recurse();
+    return this;
   }
 
   remove(value) {
-    // same balance issue from add. We need to know whether the removal will impact height of subtrees by either 1 or 0.
-    // starting at the head node, we need to go either right or left, depending on the value (compared to node's value)
-    if(!this.head) {
-      return null;
+    let head = this.head;
+    function recurse(node = head) {
+      let curr = value >= node.val ? node.right : node.left;
+      if(curr) {
+        if(value === curr.val) {
+          // delete function;
+          console.log('found a match', curr);
+          removeNode(node, value);
+        } else {
+          recurse(curr);
+        }
+      } else {
+        // handle case where no node matches
+        return false;
+      }
+      const right = node.right ? node.right.height() : 0;
+      const left = node.left ? node.left.height() : 0;
+      node.balance = left - right;
+      return;
     }
-    let curr = this.head;
-    while(curr) {
-      if(curr.right.val === value) {
+    recurse();
 
+    function removeNode(parent, value) {
+      console.log('inside removeNode()', 'parent:', parent.val, 'value:', value);
+      const node = parent.right && parent.right.val === value ? parent.right : parent.left;
+
+      if(node.right && node.left) {
+        removeNodeWithTwoChildren(parent, node);
+      } else if(node.right || node.left) {
+        removeNodeWithOneChild(parent, node);
+      } else {
+        removeNodeWithNoChildren(parent, node);
       }
     }
+    function removeNodeWithNoChildren(parent, node) {
+      if(parent.right === node) {
+        parent.right = null;
+      } else {
+        parent.left = null;
+      }
+    };
+    function removeNodeWithOneChild() {
+
+    };
+    function removeNodeWithTwoChildren() {
+
+    };
   }
 }
+
+let avl = new AVLTree();
+
+avl.add(10).add(5).add(15).add(3).add(7).add(13).add(17);
+avl.remove(17);
+console.log(avl.head);
