@@ -70,7 +70,9 @@ class AVLTree {
           return;
         }
       }
-      node.balance = node.left.height() - node.right.height();
+      const right = node.right ? node.right.height() : 0;
+      const left = node.left ? node.left.height() : 0;
+      node.balance = left - right;
       return;
     }
     recurse();
@@ -78,13 +80,19 @@ class AVLTree {
   }
 
   remove(value) {
+    // we need to rewrite this to be able to remove the head.
+    // we are referencing the parent all over the place.
     let head = this.head;
+    if(this.head.val === value) {
+      removeNode(this.head, value);
+      return;
+    }
+
     function recurse(node = head) {
       let curr = value >= node.val ? node.right : node.left;
       if(curr) {
         if(value === curr.val) {
           // delete function;
-          console.log('found a match', curr);
           removeNode(node, value);
         } else {
           recurse(curr);
@@ -105,7 +113,7 @@ class AVLTree {
       const node = parent.right && parent.right.val === value ? parent.right : parent.left;
 
       if(node.right && node.left) {
-        removeNodeWithTwoChildren(parent, node);
+        removeNodeWithTwoChildren(node);
       } else if(node.right || node.left) {
         removeNodeWithOneChild(parent, node);
       } else {
@@ -119,17 +127,88 @@ class AVLTree {
         parent.left = null;
       }
     };
-    function removeNodeWithOneChild() {
-
+    function removeNodeWithOneChild(parent, node) {
+      const child = node.left ? node.left : node.right;
+      if(parent.left === node) {
+        parent.left = child;
+      } else {
+        parent.right = child;
+      }
     };
-    function removeNodeWithTwoChildren() {
-
+    function removeNodeWithTwoChildren(node) {
+      const originalNode = node;
+      console.log('original node val:', node.val);
+      function recurse(node, parent) {
+        console.log('node inside 2 child removal', node.val);
+        if (!node.left) {
+          // delete function;
+          // swap values and delete;
+          const temp = originalNode.val;
+          originalNode.val = node.val;
+          node.val = temp;
+          removeNode(parent, node.val);
+        } else {
+          // handle case where no node matches
+          recurse(node.left, node);
+        }
+        const right = node.right ? node.right.height() : 0;
+        const left = node.left ? node.left.height() : 0;
+        node.balance = left - right;
+        return;
+      }
+      recurse(node.right, node);
+      const right = originalNode.right ? originalNode.right.height() : 0;
+      const left = originalNode.left ? originalNode.left.height() : 0;
+      originalNode.balance = left - right;
     };
+  }
+  remove2(value, node = this.head, prevVal = this.head.val) {
+    let returnNode;
+    function recurse(value, swapNode = node) {
+      // base case
+      if (!swapNode) {
+        return swapNode;
+      }
+
+      if (value < swapNode.val) { // recurse left
+        swapNode.left = recurse(value, swapNode.left, swapNode.val);
+      } else if (value > swapNode.val) { // recurse right
+        swapNode.right = recurse(value, swapNode.right, swapNode.val);
+      } else { // found the node to delete
+        if (!swapNode.left && !swapNode.right) { // remove if at end of tree
+          swapNode = null;
+        } else if (!swapNode.left && swapNode.right) { // if right is only option
+          swapNode = swapNode.right;
+        } else if (swapNode.left && !swapNode.right) { // if left is only option
+          swapNode = swapNode.left;
+        } else { // has 2 children nodes
+          returnNode = swapNode; // set node to return
+          if (swapNode.val < prevVal) { // make the swap
+            swapNode.right.left = swapNode.left;
+            return recurse(value, swapNode.right, swapNode.val);
+          } else {
+            swapNode.left.right = swapNode.right;
+            return recurse(value, swapNode.left, swapNode.val);
+          }
+        }
+      }
+      return swapNode;
+    }
+    node = recurse(value);
+    if (!node) {
+      return node;
+    }
+    // remove pointers
+    returnNode.left = null;
+    returnNode.right = null;
+
+    return returnNode;
   }
 }
 
 let avl = new AVLTree();
 
-avl.add(10).add(5).add(15).add(3).add(7).add(13).add(17);
-avl.remove(17);
+// avl.add(10).add(5).add(15).add(3).add(7).add(13).add(17);
+avl.add(44).add(17).add(78).add(32).add(50).add(88).add(48).add(62).add(84).add(92).add(80).add(82);
+avl.remove2(78);
 console.log(avl.head);
