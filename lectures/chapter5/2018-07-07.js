@@ -20,6 +20,7 @@ class SList {
   constructor() {
     this.head = null;
   }
+
   addFront(value) {
     let n = new SLNode(value);
     if(!this.head) {
@@ -32,6 +33,7 @@ class SList {
     this.head = n;
     return this;
   }
+
   removeFront() {
     if(!this.head) {
       return null;
@@ -44,11 +46,47 @@ class SList {
     temp.next = null;
     return this.head;
   }
+
+  contains(val) {
+    if(!this.head) {
+      return false;
+    }
+
+    let curr = this.head;
+    while(curr) {
+      if(curr.val === val) {
+        return true;
+      }
+      curr = curr.next;
+    }
+    return false;
+  }
+
+  front() {
+    return this.head;
+  }
+
+  display() {
+    // build an array with all the values in the ll in order
+    // print the array
+    // return the list (this)
+    let result = [];
+    if(!this.head) {
+      console.log(result);
+      return this;
+    }
+
+    let curr = this.head;
+    while(curr) {
+      result.push(curr.val);
+      curr = curr.next;
+    }
+    console.log(result);
+    return this;
+  }
 }
 
-
 let list = new SList();
-list.addFront('C').addFront("B").addFront("A");
-console.log(list);
-console.log(list.removeFront());
-console.log(list);
+let other = new SList();
+console.log('other:', other, '\n', 'list:', list);
+list.addFront('C').addFront("B").display().addFront("A").display();
