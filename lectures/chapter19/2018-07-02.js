@@ -15,7 +15,7 @@ class AVLNode {
     return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
   }
 
-  isBalanced(node = this) {
+  isBalanced() {
     return Math.abs(this.balance) <= 1;
   }
 }
